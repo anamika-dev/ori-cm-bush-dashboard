@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import DeviceCard from "./DeviceCard";
 
 describe("DeviceCard", () => {
@@ -23,8 +23,9 @@ describe("DeviceCard", () => {
 
   test("applies the correct background color based on status", () => {
     render(<DeviceCard device={device} />);
-    expect(
-      screen.getByText(/Device ID: 1/i).parentElement.parentElement
-    ).toHaveStyle("background-color: green");
+    const cardElement = screen
+      .getByRole("heading", { name: /ORI-CM-BUSH ZONE 000/i })
+      .closest(".card");
+    expect(cardElement).toHaveStyle("background-color: green");
   });
 });
